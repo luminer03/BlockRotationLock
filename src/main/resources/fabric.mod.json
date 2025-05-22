@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "modid",
+	"id": "blockrotationlock",
 	"version": "${version}",
-	"name": "Example mod",
+	"name": "Block Rotation Lock",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
 		"Me!"
@@ -16,22 +16,23 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.ExampleMod"
+			"com.blockrotationlock.BlockRotationLockMod"
 		],
 		"client": [
-			"com.example.ExampleModClient"
+			"com.blockrotationlock.BlockRotationLockModClient"
 		]
 	},
 	"mixins": [
-		"modid.mixins.json",
+		"blockrotationlock.mixins.json",
 		{
-			"config": "modid.client.mixins.json",
+			"config": "blockrotationlock.client.mixins.json",
 			"environment": "client"
 		}
+		
 	],
 	"depends": {
 		"fabricloader": ">=0.16.10",
-		"minecraft": "~1.21.5",
+		"minecraft": "~1.21.4",
 		"java": ">=21",
 		"fabric-api": "*"
 	},

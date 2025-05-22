@@ -1,9 +1,9 @@
 {
 	"required": true,
-	"package": "com.example.mixin",
+	"package": "com.blockrotationlock.mixin.client",
 	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"ExampleMixin"
+	"client": [
+		"BlockRotationLockClientMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
