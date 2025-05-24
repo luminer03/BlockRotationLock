@@ -3,7 +3,8 @@
 	"package": "com.blockrotationlock.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"BlockRotationLockClientMixin"
+		"BlockRotationLockClientMixin",
+		"BlockItemMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
