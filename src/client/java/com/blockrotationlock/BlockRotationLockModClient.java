@@ -7,8 +7,6 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudLayerRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.IdentifiedLayer;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.option.KeyBinding;
@@ -27,8 +25,6 @@ public class BlockRotationLockModClient implements ClientModInitializer {
     private static String lockedDirection = null;
 	private static Boolean lockedTopHalf = null; // true = top half, false = bottom half, null = not applicable
     private static final Identifier INDICATOR_LAYER = Identifier.of("blockrotationlock", "indicator-layer");
-
-    private static boolean hasIntegratedServer = false;
 
     @Override
     public void onInitializeClient() {
@@ -90,25 +86,7 @@ public class BlockRotationLockModClient implements ClientModInitializer {
                     }
                 }
             }
-        });  
-
-        // On join, check for integrated server
-        ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
-            hasIntegratedServer = MinecraftClient.getInstance().isInSingleplayer();
         });
-
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-            hasIntegratedServer = false;
-            rotationLockActive = false;
-            lockedDirection = null;
-            lockedTopHalf = null;
-        });
-
-        // Register the payload type for sending
-        PayloadTypeRegistry.playC2S().register(
-            PlacementPacket.Payload.ID,
-            PlacementPacket.Payload.CODEC
-        );
     }
 
     private static void renderIndicator(DrawContext context, RenderTickCounter tickCounter) {
@@ -167,9 +145,5 @@ public class BlockRotationLockModClient implements ClientModInitializer {
 
 	public static Boolean getLockedTopHalf() {
         return lockedTopHalf;
-    }
-
-    public static boolean hasIntegratedServer() {
-        return hasIntegratedServer;
     }
 }
